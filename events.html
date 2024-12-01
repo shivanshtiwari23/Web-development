@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events - Community Portal</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .event-card-img {
+            object-fit: cover;
+            height: 200px;
+        }
+        .event-title {
+            font-weight: bold;
+        }
+        .event-card-body {
+            padding: 20px;
+        }
+        .footer {
+            background-color: #343a40;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Community Portal</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="homepage.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="news.html">News</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="business.html">Business</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="events.html">Events</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="forum.html">Forum</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Event Form Section -->
+    <section class="container my-5">
+        <h2 class="text-center mb-5">Add a New Event</h2>
+        <form id="event-form">
+            <div class="mb-3">
+                <label for="eventTitle" class="form-label">Event Title</label>
+                <input type="text" class="form-control" id="eventTitle" required>
+            </div>
+            <div class="mb-3">
+                <label for="eventDate" class="form-label">Event Date</label>
+                <input type="date" class="form-control" id="eventDate" required>
+            </div>
+            <div class="mb-3">
+                <label for="eventDescription" class="form-label">Event Description</label>
+                <textarea class="form-control" id="eventDescription" rows="3" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Event</button>
+        </form>
+    </section>
+
+    <!-- Event List Section -->
+    <section class="container my-5">
+        <h2 class="text-center mb-5">Upcoming Events</h2>
+        <div class="row" id="event-list">
+            <!-- Dynamic event cards will be appended here by JavaScript -->
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <p>&copy; 2024 Community Portal. All rights reserved.</p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- JavaScript for dynamic functionality -->
+    <script>
+        // Listen for form submit
+        document.getElementById("event-form").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form from submitting the default way
+            
+            // Get form values
+            const eventTitle = document.getElementById("eventTitle").value;
+            const eventDate = document.getElementById("eventDate").value;
+            const eventDescription = document.getElementById("eventDescription").value;
+            
+            // Create new event card
+            const eventCard = document.createElement("div");
+            eventCard.classList.add("col-md-4", "mb-4");
+
+            eventCard.innerHTML = `
+                <div class="card">
+                    <img src="https://via.placeholder.com/350x200" class="card-img-top event-card-img" alt="event-image">
+                    <div class="card-body event-card-body">
+                        <h5 class="card-title event-title">${eventTitle}</h5>
+                        <p class="card-text">${eventDescription}</p>
+                        <p><strong>Date:</strong> ${eventDate}</p>
+                    </div>
+                </div>
+            `;
+
+            // Append the new event card to the event list
+            document.getElementById("event-list").appendChild(eventCard);
+
+            // Clear the form
+            document.getElementById("event-form").reset();
+        });
+    </script>
+
+</body>
+</html>
